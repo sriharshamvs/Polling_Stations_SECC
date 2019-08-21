@@ -2,12 +2,14 @@ import json
 import pandas as pd
 import numpy as np
 
+json_path = "dataset/secc_data.json"
+csv_path = "dataset/poll_station_metadata_all.csv"
+
 # Creating a dictonary from json file
-with open('secc_data.json') as f:
+with open(json_path) as f:
     SECC_dictionary = json.load(f)
 
 # Import CSV to a DataFrame and Selecting required Columns
-path = "poll_station.csv"
 df = pd.read_csv(path, error_bad_lines=False, warn_bad_lines=False, low_memory=False)
 sel_cols = ['state_or_ut', 'district', 'ac', 'polling_station', 'lat', 'long']
 df = df[sel_cols]
