@@ -70,3 +70,34 @@ df_1, df_2 = Select_State_District('Telangana', 'Medchal Malkajgiri')
 
 print(df_1.head())
 print(df_2.head())
+
+## Writing data to a file
+
+f_string = ""
+with open("testFile.csv", "w") as f:
+    f.write("PS_Address, Block_Name, Block_Area\n")
+
+for df_4_row in range(len(df_4)):
+    y = df_4.iloc[df_4_row][3]
+    for df_5_cols in df_5:
+        for df_5_rows in df_5[df_5_cols]:
+            if str(df_5_rows) != 'nan':
+                if str(df_5_rows) in y:
+                    f_string = str(y) + ","+str(df_5_cols)+"," + str(df_5_rows)+"\n"
+                    with open("testFile.csv", "a") as f:
+                        f.write(f_string)
+                        sleep(.250)
+
+## Writing data to a dataframe                        
+for df_4_row in range(len(df_4)):
+    y = df_4.iloc[df_4_row][3]
+    for df_5_cols in df_5:
+        for df_5_rows in df_5[df_5_cols]:
+            if str(df_5_rows) != 'nan':
+                if str(df_5_rows) in y:
+                    df_7[df_4_row] = df_5[df_5_rows]
+                else:
+                    df_7[df_4_row] = np.nan
+
+## Adding the DataFrame as a new Coloumn
+df_6.insert(6, "Block_Area", df_7)
